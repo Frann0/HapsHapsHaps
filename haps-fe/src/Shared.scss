@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  font-family: "Overpass", sans-serif;
+  scroll-behavior: smooth;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+/**
+*
+*    COLORS
+*
+*/
+
+$Background: #04040c;
+
+$Dark-purple: #8771c5;
+$Light-purple: #b8b1d3;
+$Glow-purple: #d2cfdf;
+$Purple: #9487c3;
+
+$Divider-purple: #d2cfdf;
+$Divider-gradient: linear-gradient(
+  to right,
+  rgba($Divider-purple, 0),
+  rgba($Divider-purple, 1),
+  rgba($Divider-purple, 0)
+);
+
+$Divider-purple-0: #d2cfdf00;
+$Light-purple-0: #b8b1d300;
+$Light-purple-10: #b8b1d31a;
+$Purple-0: #9487c300;
+
+$White: #ffffff;
+$White-50: #ffffff80;
+$White-25: #ffffff40;
+
+$Input-background: linear-gradient(
+  to bottom,
+  rgba($Light-purple, 0.1),
+  rgba($Purple, 0)
+);
+/**
+*
+*    FILTERS
+*
+*/
+
+$Unsaturated: saturate(0);
+$Saturated: saturate(1);
+
+$Icon-purple: invert(76%) sepia(20%) saturate(319%) hue-rotate(212deg)
+  brightness(96%) contrast(81%);
+
+/**
+*
+*    MIXINS
+*
+*/
+
+@mixin textGradient($color1, $color2) {
+  background: linear-gradient(to right, $color1, $color2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
