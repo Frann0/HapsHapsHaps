@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap");
 * {
-  font-family: "Overpass", sans-serif;
+  font-family: "Afacad", sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -22,35 +21,24 @@ a {
 *
 */
 
-$Background: #04040c;
+$Background: #081116;
 
-$Dark-purple: #8771c5;
-$Light-purple: #b8b1d3;
-$Glow-purple: #d2cfdf;
-$Purple: #9487c3;
-
-$Divider-purple: #d2cfdf;
-$Divider-gradient: linear-gradient(
-  to right,
-  rgba($Divider-purple, 0),
-  rgba($Divider-purple, 1),
-  rgba($Divider-purple, 0)
-);
-
-$Divider-purple-0: #d2cfdf00;
-$Light-purple-0: #b8b1d300;
-$Light-purple-10: #b8b1d31a;
-$Purple-0: #9487c300;
+$Text: #e3edf2;
+$Text-10: #e3edf21a;
+$Text-25: #e3edf240;
 
 $White: #ffffff;
 $White-50: #ffffff80;
 $White-25: #ffffff40;
 
-$Input-background: linear-gradient(
-  to bottom,
-  rgba($Light-purple, 0.1),
-  rgba($Purple, 0)
-);
+$Primary: #299fe0;
+
+$Green: #99df93;
+$Green-25: #99df9340;
+
+$Red: #db5353;
+$Red-25: #db535340;
+
 /**
 *
 *    FILTERS
@@ -68,9 +56,3 @@ $Icon-purple: invert(76%) sepia(20%) saturate(319%) hue-rotate(212deg)
 *    MIXINS
 *
 */
-
-@mixin textGradient($color1, $color2) {
-  background: linear-gradient(to right, $color1, $color2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}

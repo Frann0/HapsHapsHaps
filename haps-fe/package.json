@@ -15,6 +15,7 @@
     "mobx-react-lite": "^4.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router-dom": "^7.10.1",
     "sass": "^1.95.0"
   },
   "devDependencies": {

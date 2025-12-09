@@ -2,6 +2,14 @@ import { observer } from "mobx-react-lite";
 import "./App.scss";
 import { useStore } from "./stores/store";
 import { useEffect, useState } from "react";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
+import { DefaultRoutes } from "./interfaces/DefaultRoutes";
 
 function App() {
   const { socketStore, lobbyStore } = useStore();
@@ -29,7 +37,26 @@ function App() {
 
   return (
     <>
-      <input
+      <Routes>
+        {DefaultRoutes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={<route.component />}
+          />
+        ))}
+      </Routes>
+    </>
+  );
+}
+
+export default observer(App);
+
+/**
+ *
+ *
+ *
+ *  <input
         type="text"
         placeholder="Navn"
         onChange={(e) => setNavn(e.target.value)}
@@ -86,8 +113,5 @@ function App() {
       ) : (
         <div style={{ color: "white" }}>not connected</div>
       )}
-    </>
-  );
-}
 
-export default observer(App);
+*/

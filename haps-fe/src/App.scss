@@ -1,4 +1,4 @@
-@import "./Shared.scss";
+@use "./Shared.scss" as *;
 
 @media screen and (max-width: 768px) {
   .App {
