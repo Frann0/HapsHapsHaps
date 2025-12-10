@@ -1,0 +1,47 @@
+@use "../../Shared.scss" as *;
+.Landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+
+  &_Wrapper {
+    width: 100%;
+    max-width: 250px;
+    max-height: 350px;
+    height: 100%;
+    border: 1px solid $Text-25;
+    background: $Text-10;
+    border-radius: 10px;
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+
+    .Landing_Button {
+      width: 100%;
+      height: 30px;
+      border-radius: 10px;
+      border: 1px solid $Green-25;
+      background: $Green-25;
+      color: $Green;
+    }
+
+    .Landing_Inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      .Input {
+        width: 100%;
+      }
+    }
+  }
+}

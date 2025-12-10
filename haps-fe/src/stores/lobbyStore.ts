@@ -1,15 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import type { RootStore } from "./store";
+import type { Player } from "../interfaces/Player";
 
 export class LobbyStore {
   root: RootStore;
 
-  players: Array<{
-    id: string;
-    username: string;
-    snap: string;
-    ready: boolean;
-  }> = [];
+  players: Array<Player> = [];
 
   allReady = false;
 

@@ -38,7 +38,7 @@ export class SocketStore {
   }
 
   sendMessage(message: string) {
-    this.socket?.send(JSON.stringify(message));
+    this.socket?.send(message);
   }
 
   disconnect() {

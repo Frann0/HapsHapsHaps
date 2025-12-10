@@ -1,0 +1,23 @@
+@use "../../Shared.scss" as *;
+
+.Player {
+  background: $Secondary-20;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 5px);
+  border: 1px solid $Text-25;
+
+  &_Name {
+    font-weight: 700;
+    font-size: 24px;
+  }
+}
+
+.Ready {
+  box-shadow: $Green 0px 0px 5px;
+}

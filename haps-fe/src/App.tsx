@@ -17,35 +17,21 @@ function App() {
   const [navn, setNavn] = useState("");
   const [snaps, setSnaps] = useState("");
 
-  useEffect(() => {
-    socketStore.createSocket();
-    console.log(socketStore.socket);
-
-    const handleUnload = () => {
-      socketStore.disconnect();
-    };
-
-    window.addEventListener("beforeunload", handleUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleUnload);
-      socketStore.disconnect();
-    };
-  }, []);
-
   const joinString = () => {};
 
   return (
     <>
-      <Routes>
-        {DefaultRoutes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={<route.component />}
-          />
-        ))}
-      </Routes>
+      <div className="App">
+        <Routes>
+          {DefaultRoutes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={<route.component />}
+            />
+          ))}
+        </Routes>
+      </div>
     </>
   );
 }
