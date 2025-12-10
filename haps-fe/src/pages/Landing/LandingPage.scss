@@ -43,5 +43,17 @@
         width: 100%;
       }
     }
+
+    .Landing_Check {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      width: 100%;
+
+      &_Text {
+        width: 100%;
+        flex: 1;
+      }
+    }
   }
 }

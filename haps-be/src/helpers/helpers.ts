@@ -1,6 +1,7 @@
-import { Player } from "../interfaces/User";
+import { Player, Snaps } from "../interfaces/User";
 
 export const players: Player[] = [];
+export const snapsList: Snaps[] = [];
 
 export const broadcast = (data: any) => {
   for (const p of players) {

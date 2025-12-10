@@ -1,6 +1,12 @@
 export interface Player {
   id: string;
   username: string;
-  snaps: string;
+  snaps: Snaps | null;
   ready: boolean;
+}
+
+export interface Snaps {
+  id: string;
+  owner: string;
+  name: string;
 }

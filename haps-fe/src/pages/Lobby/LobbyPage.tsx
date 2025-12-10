@@ -28,7 +28,7 @@ const LobbyPage = () => {
         {socketStore.connected && (
           <>
             {lobbyStore.players.map((p) => (
-              <LobbyPlayer player={p} />
+              <LobbyPlayer key={p.id} player={p} />
             ))}
           </>
         )}

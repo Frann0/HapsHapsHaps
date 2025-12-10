@@ -1,7 +1,7 @@
 export type Player = {
   id: string;
   username: string;
-  snaps: string;
+  snaps: Snaps | null;
   ready: boolean;
   ws: any;
 };
@@ -9,6 +9,12 @@ export type Player = {
 export type PlayerPublic = {
   id: string;
   username: string;
-  snaps: string;
+  snaps: Snaps | null;
   ready: boolean;
+};
+
+export type Snaps = {
+  id: string;
+  owner: string;
+  name: string;
 };

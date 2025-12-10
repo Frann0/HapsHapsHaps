@@ -4,10 +4,12 @@ import { useStore } from "../../stores/store";
 import "./LandingPage.scss";
 import Input from "../../components/shared/input/input";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/H3_Logo.svg";
 
 const LandingPage = () => {
   const [username, setUsername] = useState("");
-  const [snaps, setSnaps] = useState("");
+  const [bringing, setBringing] = useState(false);
+  const [snaps, setSnaps] = useState<string | null>(null);
   const { socketStore } = useStore();
   const navigate = useNavigate();
 
@@ -21,8 +23,7 @@ const LandingPage = () => {
       username,
       snaps,
     };
-    console.log(username, snaps);
-    if (username === "" || snaps === "") return;
+    if (username === "") return;
 
     socketStore.sendMessage(JSON.stringify(join));
     navigate("/lobby");
@@ -31,7 +32,9 @@ const LandingPage = () => {
   return (
     <div className="Landing">
       <div className="Landing_Wrapper">
-        <div>logo</div>
+        <div className="Landing_Logo">
+          <img src={logo} className="Landing_Logo_Img" />
+        </div>
         <div className="Landing_Inputs">
           <Input
             placeholder="Navn"
@@ -39,12 +42,23 @@ const LandingPage = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <Input
-            placeholder="Snaps"
-            type="text"
-            value={snaps}
-            onChange={(e) => setSnaps(e.target.value)}
-          />
+          {bringing && (
+            <Input
+              placeholder="Snaps"
+              type="text"
+              value={snaps || ""}
+              onChange={(e) => setSnaps(e.target.value)}
+            />
+          )}
+          <div className="Landing_Check" onClick={() => setBringing(!bringing)}>
+            <input
+              className="Landing_Check_Input"
+              type="checkbox"
+              checked={bringing}
+            ></input>
+
+            <p className="Landing_Check_Text">Jeg har snaps med</p>
+          </div>
         </div>
         <button className="Landing_Button" onClick={() => handleJoin()}>
           Connect

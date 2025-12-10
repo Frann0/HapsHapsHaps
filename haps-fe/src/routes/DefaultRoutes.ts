@@ -1,7 +1,7 @@
 import LandingPage from "../pages/Landing/LandingPage";
 import LobbyPage from "../pages/Lobby/LobbyPage";
 import { LobbyStore } from "../stores/lobbyStore";
-import type { Route } from "./Route";
+import type { Route } from "../interfaces/Route.ts";
 
 export const DefaultRoutes: Route[] = [
   {

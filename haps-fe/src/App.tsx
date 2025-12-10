@@ -1,24 +1,9 @@
 import { observer } from "mobx-react-lite";
 import "./App.scss";
-import { useStore } from "./stores/store";
-import { useEffect, useState } from "react";
-import {
-  Routes,
-  Route,
-  useNavigate,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
-import { DefaultRoutes } from "./interfaces/DefaultRoutes";
+import { Routes, Route } from "react-router-dom";
+import { DefaultRoutes } from "./routes/DefaultRoutes";
 
 function App() {
-  const { socketStore, lobbyStore } = useStore();
-
-  const [navn, setNavn] = useState("");
-  const [snaps, setSnaps] = useState("");
-
-  const joinString = () => {};
-
   return (
     <>
       <div className="App">

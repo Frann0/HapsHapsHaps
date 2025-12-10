@@ -1,11 +1,12 @@
 import { Elysia, t } from "elysia";
 import { randomUUIDv7 } from "bun";
-import { Player, PlayerPublic } from "./interfaces/User";
+import { Player, PlayerPublic, Snaps } from "./interfaces/User";
 import {
   broadcast,
   checkAllReady,
   getPublicPlayers,
   players,
+  snapsList,
 } from "./helpers/helpers";
 
 const app = new Elysia()
@@ -32,10 +33,22 @@ const app = new Elysia()
         }
 
         case "join": {
+          let snapsObj: Snaps | null = null;
+
+          if (msg.snaps !== null) {
+            snapsObj = {
+              id: randomUUIDv7(),
+              owner: ws.data.id,
+              name: msg.snaps,
+            };
+
+            snapsList.push(snapsObj);
+          }
+
           const newPlayer: Player = {
             id: ws.data.id,
             username: msg.username,
-            snaps: msg.snaps,
+            snaps: snapsObj,
             ready: false,
             ws,
           };
