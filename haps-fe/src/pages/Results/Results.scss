@@ -1,0 +1,144 @@
+@use "../../Shared.scss" as *;
+
+.Results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+
+  &_Button {
+    width: 100%;
+    height: 40px;
+    border-radius: $Border-radius;
+    border: 1px solid $Green;
+    background: $Green-25;
+    color: $Green;
+    font-size: 24px;
+  }
+
+  &_Container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    gap: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 0;
+    box-sizing: border-box;
+
+    &_Result {
+      background: $Secondary-20;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: $Border-radius;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border: 1px solid $Text-25;
+      gap: 10px;
+      color: $Text;
+
+      &:nth-child(1) {
+        background: $Gold-20;
+        border: 1px solid $Gold;
+        color: $Gold;
+
+        .Results_Container_Result_Rank {
+          border-right: 1px solid $Gold-25;
+        }
+
+        .Results_Container_Result_Point {
+          border-left: 1px solid $Gold-25;
+        }
+      }
+
+      &:nth-child(2) {
+        background: $Silver-20;
+        border: 1px solid $Silver;
+        color: $Silver;
+
+        .Results_Container_Result_Rank {
+          border-right: 1px solid $Silver-25;
+        }
+
+        .Results_Container_Result_Point {
+          border-left: 1px solid $Silver-25;
+        }
+      }
+
+      &:nth-child(3) {
+        background: $Bronze-20;
+        border: 1px solid $Bronze;
+        color: $Bronze;
+
+        .Results_Container_Result_Rank {
+          border-right: 1px solid $Bronze-25;
+        }
+
+        .Results_Container_Result_Point {
+          border-left: 1px solid $Bronze-25;
+        }
+      }
+
+      &_Rank {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid $Text-25;
+        padding-right: 10px;
+        height: 100%;
+
+        &_Text {
+          margin: 0;
+          font-size: 32px;
+          font-weight: bold;
+        }
+      }
+
+      &_Info {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+
+        &_Name {
+          font-weight: 700;
+          font-size: 24px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        &_Snaps {
+          font-size: 18px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+
+      &_Point {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-left: 10px;
+        border-left: 1px solid $Text-25;
+        align-items: center;
+        box-sizing: border-box;
+
+        &_Text {
+          font-size: 16px;
+        }
+
+        &_Score {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

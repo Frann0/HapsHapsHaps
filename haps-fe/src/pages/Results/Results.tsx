@@ -13,15 +13,31 @@ const Results = () => {
   };
 
   return (
-    <div>
-      {gameStore.finalResults.map((p) => (
-        <>
-          <p>
-            {p.name} - {p.owner_name} - {p.total}
-          </p>
-        </>
-      ))}
-      <button onClick={handleNavigate}>Hjem</button>
+    <div className="Results">
+      <div className="Results_Container">
+        {gameStore.finalResults.map((p, index) => (
+          <div className="Results_Container_Result">
+            <div className="Results_Container_Result_Rank">
+              <h1 className="Results_Container_Result_Rank_Text">
+                #{index + 1}
+              </h1>
+            </div>
+            <div className="Results_Container_Result_Info">
+              <p className="Results_Container_Result_Info_Name">
+                {p.owner_name}
+              </p>
+              <p className="Results_Container_Result_Info_Snaps">{p.name}</p>
+            </div>
+            <div className="Results_Container_Result_Point">
+              <p className="Results_Container_Result_Point_Text">Point</p>
+              <p className="Results_Container_Result_Point_Score">{p.total}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button className="Results_Button" onClick={handleNavigate}>
+        Hjem
+      </button>
     </div>
   );
 };
