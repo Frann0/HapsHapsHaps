@@ -16,5 +16,6 @@ export type PlayerPublic = {
 export type Snaps = {
   id: string;
   owner: string;
+  owner_name: string;
   name: string;
 };

@@ -34,6 +34,14 @@ export class SocketStore {
       case "allReady":
         this.root.lobbyStore.allReady = true;
         break;
+
+      case "round_start":
+        this.root.gameStore.startRound(msg.snaps, msg.roundIndex);
+        break;
+
+      case "game_end":
+        this.root.gameStore.endGame(msg.results, msg.winner);
+        break;
     }
   }
 

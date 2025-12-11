@@ -3,14 +3,22 @@ import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
 import LobbyPlayer from "../../components/LobbyPlayer/LobbyPlayer";
 import "./LobbyPage.scss";
+import { useNavigate } from "react-router-dom";
 
 const LobbyPage = () => {
-  const { lobbyStore, socketStore } = useStore();
+  const { lobbyStore, socketStore, gameStore } = useStore();
   const [ready, setReady] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(lobbyStore.players);
   }, []);
+
+  useEffect(() => {
+    if (gameStore.gameStarted) {
+      navigate("/game");
+    }
+  }, [gameStore.gameStarted]);
 
   const handleReady = () => {
     setReady(!ready);

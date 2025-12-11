@@ -4,9 +4,16 @@ import { Player, PlayerPublic, Snaps } from "./interfaces/User";
 import {
   broadcast,
   checkAllReady,
+  checkAllVoted,
+  currentRoundIndex,
+  endGame,
   getPublicPlayers,
+  nextRound,
   players,
+  rounds,
   snapsList,
+  startGame,
+  votes,
 } from "./helpers/helpers";
 
 const app = new Elysia()
@@ -28,7 +35,7 @@ const app = new Elysia()
     message(ws, msg: any) {
       switch (msg.type) {
         case "test": {
-          broadcast({ type: "test", msg });
+          broadcast({ type: "test", info: { snapsList, players } });
           break;
         }
 
@@ -39,6 +46,7 @@ const app = new Elysia()
             snapsObj = {
               id: randomUUIDv7(),
               owner: ws.data.id,
+              owner_name: msg.username,
               name: msg.snaps,
             };
 
@@ -77,7 +85,27 @@ const app = new Elysia()
 
           if (checkAllReady()) {
             broadcast({ type: "allReady" });
+            startGame();
+            nextRound();
             // later: start tournament here
+          }
+
+          break;
+        }
+
+        case "vote": {
+          const playerId = ws.data.id;
+          const snaps = rounds[currentRoundIndex];
+          const snapsId = snaps.id;
+
+          votes[playerId][snapsId] = msg.score;
+
+          if (checkAllVoted()) {
+            const continued = nextRound();
+
+            if (!continued) {
+              endGame();
+            }
           }
 
           break;

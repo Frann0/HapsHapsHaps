@@ -8,5 +8,6 @@ export interface Player {
 export interface Snaps {
   id: string;
   owner: string;
+  owner_name: string;
   name: string;
 }

@@ -5,7 +5,7 @@ import type { Player } from "../interfaces/Player";
 export class LobbyStore {
   root: RootStore;
 
-  players: Array<Player> = [];
+  players: Player[] = [];
 
   allReady = false;
 
@@ -14,8 +14,13 @@ export class LobbyStore {
     makeAutoObservable(this);
   }
 
-  setPlayers(players: typeof this.players) {
+  setPlayers(players: Player[]) {
+    console.log(players);
     this.players = players;
     this.allReady = players.length > 0 && players.every((p) => p.ready);
+  }
+
+  findPlayerById(id: string) {
+    return this.players.find((p) => p.id === id);
   }
 }
