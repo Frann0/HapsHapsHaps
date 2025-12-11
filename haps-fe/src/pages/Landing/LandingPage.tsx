@@ -61,7 +61,7 @@ const LandingPage = () => {
           </div>
         </div>
         <button className="Landing_Button" onClick={() => handleJoin()}>
-          Connect
+          LET'S GET THIS PARTY STARTED
         </button>
       </div>
     </div>

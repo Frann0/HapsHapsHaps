@@ -36,7 +36,7 @@ const Results = () => {
         ))}
       </div>
       <button className="Results_Button" onClick={handleNavigate}>
-        Hjem
+        Git gud noobs
       </button>
     </div>
   );

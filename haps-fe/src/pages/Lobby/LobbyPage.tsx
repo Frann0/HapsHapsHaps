@@ -21,11 +21,13 @@ const LobbyPage = () => {
   }, [gameStore.gameStarted]);
 
   const handleReady = () => {
-    setReady(!ready);
+    let t = ready;
+    t = !ready;
+    setReady(t);
 
     const r = {
       type: "ready",
-      ready: ready,
+      ready: t,
     };
 
     socketStore.sendMessage(JSON.stringify(r));
