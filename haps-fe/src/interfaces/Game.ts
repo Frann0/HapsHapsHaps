@@ -5,3 +5,9 @@ export interface Results {
   owner_name: string;
   total: number;
 }
+
+export interface VotingStatus {
+  id: string;
+  username: string;
+  hasVoted: boolean;
+}

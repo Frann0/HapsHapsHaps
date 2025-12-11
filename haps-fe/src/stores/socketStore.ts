@@ -27,7 +27,6 @@ export class SocketStore {
   handleMessage(msg: any) {
     switch (msg.type) {
       case "lobbyUpdate":
-        console.log(msg.players);
         this.root.lobbyStore.setPlayers(msg.players);
         break;
 
@@ -41,6 +40,14 @@ export class SocketStore {
 
       case "game_end":
         this.root.gameStore.endGame(msg.results, msg.winner);
+        break;
+
+      case "votingStatus":
+        this.root.gameStore.setVotingStatus(msg.players);
+        break;
+
+      case "playerId":
+        this.root.gameStore.setPlayerId(msg.playerId);
         break;
     }
   }

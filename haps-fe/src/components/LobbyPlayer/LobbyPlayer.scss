@@ -4,7 +4,7 @@
   background: $Secondary-20;
   padding: 20px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: $Border-radius;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,5 +46,6 @@
 }
 
 .Ready {
-  box-shadow: $Green 0px 0px 5px;
+  background: $Green-25;
+  border: 1px solid $Green;
 }

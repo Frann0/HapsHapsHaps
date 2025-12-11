@@ -2,22 +2,20 @@ import { observer } from "mobx-react-lite";
 import "./GamePage.scss";
 import { useStore } from "../../stores/store";
 import { useEffect, useState } from "react";
-import Input from "../../components/shared/input/input";
 import { useNavigate } from "react-router-dom";
 
 import up from "../../assets/Up.svg";
 import down from "../../assets/Down.svg";
+import person from "../../assets/person.svg";
+import bottle from "../../assets/bottle.svg";
+
+import spinner from "../../assets/spinner.svg";
+import check from "../../assets/check.svg";
 
 const GamePage = () => {
-  const { socketStore, lobbyStore, gameStore } = useStore();
+  const { gameStore } = useStore();
   const [score, setScore] = useState(1);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(gameStore.currentSnaps!.owner);
-
-    lobbyStore.players.map((p) => console.log(p.id));
-  }, []);
 
   useEffect(() => {
     if (gameStore.gameEnded) {
@@ -66,8 +64,18 @@ const GamePage = () => {
         <>
           {gameStore.currentSnaps && (
             <div className="Game_Snaps">
-              <p>{gameStore.currentSnaps.owner_name}</p>
-              <p>{gameStore.currentSnaps.name}</p>
+              <div className="Game_Snaps_Info">
+                <img src={person} className="Game_Snaps_Info_Icon" />
+                <p className="Game_Snaps_Info_Name">
+                  {gameStore.currentSnaps.owner_name}
+                </p>
+              </div>
+              <div className="Game_Snaps_Info">
+                <img src={bottle} className="Game_Snaps_Info_Icon" />
+                <p className="Game_Snaps_Info_Snaps">
+                  {gameStore.currentSnaps.name}
+                </p>
+              </div>
             </div>
           )}
           <div className="Game_Number">
@@ -84,7 +92,33 @@ const GamePage = () => {
               <img src={down} className="Game_Number_Button_Bottom_Img" />
             </button>
           </div>
-          <button onClick={handleVote}>STEM!</button>
+          <button className="Game_Button" onClick={handleVote}>
+            STEM!
+          </button>
+        </>
+      )}
+
+      {gameStore.hasSubmittedVote && (
+        <>
+          <div className="Game_Wait">
+            <p className="Game_Wait_Text">Venter på dem der har tabt sutten!</p>
+
+            <div className="Game_Wait_List">
+              {gameStore.votingStatus
+                .filter((p) => p.id !== gameStore.playerId)
+                .map((p) => (
+                  <div
+                    className={`Game_Wait_Person ${p.hasVoted ? "HasVoted" : ""}`}
+                  >
+                    <p className="Game_Wait_Person_Name">{p.username}</p>
+                    <img
+                      src={p.hasVoted ? check : spinner}
+                      className={`${p.hasVoted ? "icon_hasvoted" : "icon"}`}
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
         </>
       )}
     </div>

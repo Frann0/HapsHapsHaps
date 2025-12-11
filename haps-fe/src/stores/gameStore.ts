@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import type { RootStore } from "./store";
 import type { Player, Snaps } from "../interfaces/Player";
-import type { Results } from "../interfaces/Game";
+import type { Results, VotingStatus } from "../interfaces/Game";
 
 export class GameStore {
   root: RootStore;
@@ -11,9 +11,11 @@ export class GameStore {
   hasSubmittedVote: boolean = false;
   gameStarted: boolean = false;
   gameEnded: boolean = false;
+  votingStatus: VotingStatus[] = [];
 
   finalResults: Results[] = [];
   winner: Results | null = null;
+  playerId: string | null = null;
 
   startRound(snaps: Snaps, roundIndex: number) {
     this.gameStarted = true;
@@ -54,6 +56,16 @@ export class GameStore {
     this.root.lobbyStore.allReady = false;
     this.root.socketStore.disconnect();
     this.root.socketStore.createSocket();
+  }
+
+  setVotingStatus(list: VotingStatus[]) {
+    const l = list.filter((p) => p.id !== this.playerId);
+    console.log(l);
+    this.votingStatus = l;
+  }
+
+  setPlayerId(id: string) {
+    this.playerId = id;
   }
 
   constructor(root: RootStore) {

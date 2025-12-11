@@ -105,3 +105,14 @@ export const resetGame = () => {
     delete votes[playerId];
   }
 };
+
+export const getVotingStatus = (snapsId: string, excludeId: string) => {
+  return players.map((p) => {
+    const playerVotes = votes[p.id] || {};
+    return {
+      id: p.id,
+      username: p.username,
+      hasVoted: playerVotes[snapsId] !== undefined,
+    };
+  });
+};

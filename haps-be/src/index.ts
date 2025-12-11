@@ -7,7 +7,9 @@ import {
   checkAllVoted,
   currentRoundIndex,
   endGame,
+  getPlayersMissingVote,
   getPublicPlayers,
+  getVotingStatus,
   nextRound,
   players,
   rounds,
@@ -64,7 +66,17 @@ const app = new Elysia()
           if (players.find((p) => p.id === ws.data.id)) return;
           players.push(newPlayer);
 
-          broadcast({ type: "lobbyUpdate", players: getPublicPlayers() });
+          ws.send(
+            JSON.stringify({
+              type: "playerId",
+              playerId: ws.data.id,
+            }),
+          );
+
+          broadcast({
+            type: "lobbyUpdate",
+            players: getPublicPlayers(),
+          });
           break;
         }
 
@@ -97,8 +109,16 @@ const app = new Elysia()
           const playerId = ws.data.id;
           const snaps = rounds[currentRoundIndex];
           const snapsId = snaps.id;
-
+          if (!votes[playerId]) votes[playerId] = {};
           votes[playerId][snapsId] = msg.score;
+
+          const statusList = getVotingStatus(snapsId, playerId);
+
+          // send only to this user
+          broadcast({
+            type: "votingStatus",
+            players: statusList,
+          });
 
           if (checkAllVoted()) {
             const continued = nextRound();
