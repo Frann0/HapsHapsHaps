@@ -1,0 +1,21 @@
+services:
+  backend:
+    container_name: haps-backend
+    image: franno0/haps-backend:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
+  frontend:
+    container_name: haps-frontend
+    image: franno0/haps-frontend:latest
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - VITE_WS_ADDRESS=ws://backend:3000/ws
+    ports:
+      - 8080:80
+    depends_on:
+      - backend

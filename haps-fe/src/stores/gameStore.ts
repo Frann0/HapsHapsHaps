@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import type { RootStore } from "./store";
-import type { Player, Snaps } from "../interfaces/Player";
+import type { Snaps } from "../interfaces/Player";
 import type { Results, VotingStatus } from "../interfaces/Game";
 
 export class GameStore {

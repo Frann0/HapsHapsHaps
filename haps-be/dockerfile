@@ -1,0 +1,16 @@
+FROM oven/bun:1 AS build
+
+WORKDIR /app
+
+COPY package.json ./
+RUN bun install --production
+
+COPY . .
+
+# If you're compiling TS → JS, do this:
+# RUN bun build src/index.ts --outdir dist
+
+# If you're running directly with Bun + TS, skip the above
+
+EXPOSE 3000
+CMD ["bun", "src/index.ts"]
