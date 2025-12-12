@@ -1,3 +1,4 @@
+import { Session } from "../interfaces/sessions";
 import { Player, Snaps } from "../interfaces/User";
 
 export const players: Player[] = [];
@@ -7,6 +8,8 @@ export let rounds: Snaps[] = [];
 export let currentRoundIndex = -1;
 
 export const votes: Record<string, Record<string, number>> = {};
+export const sessions = new Map<string, Session>();
+export let gameStarted: boolean = false;
 
 export const broadcast = (data: any) => {
   for (const p of players) {
@@ -35,6 +38,8 @@ export const startGame = () => {
   for (const p of players) {
     votes[p.id] = {};
   }
+
+  gameStarted = true;
 };
 
 export const nextRound = () => {
@@ -55,6 +60,22 @@ export const nextRound = () => {
       name: snaps.name,
     },
   });
+
+  for (const s of sessions.values()) {
+    s.gameState = {
+      ...s.gameState,
+      gameStarted: true,
+      gameEnded: false,
+      currentRoundIndex,
+      currentSnaps: {
+        id: snaps.id,
+        owner: snaps.owner,
+        owner_name: snaps.owner_name,
+        name: snaps.name,
+      },
+      hasVoted: false,
+    };
+  }
 
   return true;
 };
@@ -84,6 +105,13 @@ export const endGame = () => {
     results: final,
     winner: final[0],
   });
+
+  for (const s of sessions.values()) {
+    s.gameState = {
+      ...s.gameState,
+      gameEnded: true,
+    };
+  }
   resetGame();
 };
 

@@ -11,14 +11,29 @@ const LobbyPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(lobbyStore.players);
-  }, []);
+    if (socketStore.socket === null) {
+      navigate("/");
+    } else {
+      if (lobbyStore.players) return;
+      socketStore.sendMessage(
+        JSON.stringify({
+          type: "lobbyRestore",
+        }),
+      );
+    }
+  });
+
+  const t = async () => {
+    socketStore.createSocket();
+  };
 
   useEffect(() => {
     if (gameStore.gameStarted) {
       navigate("/game");
+    } else if (gameStore.gameEnded) {
+      navigate("/results");
     }
-  }, [gameStore.gameStarted]);
+  }, [gameStore.gameStarted, gameStore.gameEnded]);
 
   const handleReady = () => {
     let t = ready;

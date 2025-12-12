@@ -49,6 +49,15 @@ export class SocketStore {
       case "playerId":
         this.root.gameStore.setPlayerId(msg.playerId);
         break;
+
+      case "restore_state":
+        this.root.gameStore.restoreState(msg.state);
+        break;
+
+      case "lobbyRestore":
+        console.log(msg.players);
+        this.root.lobbyStore.setPlayers(msg.players);
+        break;
     }
   }
 
@@ -59,6 +68,7 @@ export class SocketStore {
   disconnect() {
     this.socket?.close();
     this.socket = null;
+    this.connected = false;
   }
 
   constructor(root: RootStore) {

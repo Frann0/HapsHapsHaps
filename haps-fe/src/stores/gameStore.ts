@@ -16,6 +16,7 @@ export class GameStore {
   finalResults: Results[] = [];
   winner: Results | null = null;
   playerId: string | null = null;
+  inLobby: boolean = false;
 
   startRound(snaps: Snaps, roundIndex: number) {
     this.gameStarted = true;
@@ -42,6 +43,7 @@ export class GameStore {
   }
 
   resetGame() {
+    localStorage.clear();
     this.currentRoundIndex = -1;
     this.currentSnaps = null;
     this.submittedVote = null;
@@ -66,6 +68,38 @@ export class GameStore {
 
   setPlayerId(id: string) {
     this.playerId = id;
+  }
+
+  restoreState(state: any) {
+    /**
+     * Expected structure of state from backend:
+     * {
+     *   gameStarted: boolean,
+     *   gameEnded: boolean,
+     *   currentRoundIndex: number,
+     *   currentSnaps: Snaps | null,
+     *   submittedVote: number | null,
+     *   hasSubmittedVote: boolean,
+     *   votingStatus: VotingStatus[],
+     *   finalResults: Results[],
+     *   winner: Results | null
+     * }
+     */
+
+    console.log(state);
+
+    if (!state) return;
+
+    this.gameStarted = state.gameStarted ?? false;
+    this.gameEnded = state.gameEnded ?? false;
+    this.currentRoundIndex = state.currentRoundIndex ?? -1;
+    this.currentSnaps = state.currentSnaps ?? null;
+    this.submittedVote = state.submittedVote ?? null;
+    this.hasSubmittedVote = state.hasSubmittedVote ?? false;
+    this.votingStatus = state.votingStatus ?? [];
+    this.finalResults = state.finalResults ?? [];
+    this.winner = state.winner ?? null;
+    this.inLobby = state.inLobby ?? false;
   }
 
   constructor(root: RootStore) {

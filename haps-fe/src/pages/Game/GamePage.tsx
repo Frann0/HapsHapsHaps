@@ -23,6 +23,13 @@ const GamePage = () => {
     }
   }, [gameStore.gameEnded]);
 
+  // Optional: restore current round if reconnect
+  useEffect(() => {
+    if (gameStore.currentRoundIndex >= 0 && !gameStore.hasSubmittedVote) {
+      setScore(1); // reset vote input
+    }
+  }, [gameStore.currentRoundIndex]);
+
   const handleScore = (value: number) => {
     const MAX = 10;
     const MIN = 1;

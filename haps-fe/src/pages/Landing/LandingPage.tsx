@@ -10,12 +10,27 @@ const LandingPage = () => {
   const [username, setUsername] = useState("");
   const [bringing, setBringing] = useState(false);
   const [snaps, setSnaps] = useState<string | null>(null);
-  const { socketStore } = useStore();
+  const { socketStore, gameStore, lobbyStore } = useStore();
   const navigate = useNavigate();
 
   useEffect(() => {
     socketStore.createSocket();
-  }, []);
+    // If we reconnect and the game has already started
+    if (gameStore.gameStarted) {
+      navigate("/game");
+    } else if (gameStore.gameEnded) {
+      navigate("/results");
+    } else if (gameStore.inLobby) {
+      if (!lobbyStore.players) {
+        socketStore.sendMessage(
+          JSON.stringify({
+            type: "lobbyRestore",
+          }),
+        );
+      }
+      navigate("/lobby");
+    }
+  }, [gameStore.gameStarted, gameStore.gameEnded, gameStore.inLobby]);
 
   const handleJoin = () => {
     const join = {
