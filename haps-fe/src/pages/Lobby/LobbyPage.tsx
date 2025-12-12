@@ -45,10 +45,10 @@ const LobbyPage = () => {
       </div>
       <div className="Button_Container">
         <button
-          className={`Button ${ready ? "Button_Ready" : ""}`}
+          className={`Button ${!ready ? "Button_Ready" : ""}`}
           onClick={handleReady}
         >
-          {ready ? "KLAR FOR SATAN!" : "IKKE KLAR FOR SATAN!"}
+          {!ready ? "JEG ER KLAR FOR SATAN!" : "JEG ER IKKE KLAR FOR SATAN!"}
         </button>
       </div>
     </div>
